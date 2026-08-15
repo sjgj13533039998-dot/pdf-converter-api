@@ -29,7 +29,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage, limits: { fileSize: 50 * 1024 * 1024 } });
 
-// 使用统计
 const usageStats = {
   totalRequests: 0,
   totalConversions: 0,
@@ -37,7 +36,6 @@ const usageStats = {
   dailyStats: {}
 };
 
-// 记录使用统计
 function logUsage(endpoint, ip) {
   usageStats.totalRequests++;
   const today = new Date().toISOString().split('T')[0];
@@ -45,17 +43,6 @@ function logUsage(endpoint, ip) {
     usageStats.dailyStats[today] = { requests: 0, conversions: 0, merges: 0 };
   }
   usageStats.dailyStats[today].requests++;
-  
-  const logEntry = {
-    timestamp: new Date().toISOString(),
-    endpoint,
-    ip: ip || 'unknown'
-  };
-  
-  // 保存到日志文件
-  const logFile = path.join(__dirname, '../../usage.log');
-  fs.appendFileSync(logFile, JSON.stringify(logEntry) + '\n');
-  
   console.log(`[Usage] ${endpoint} - ${new Date().toISOString()}`);
 }
 
@@ -124,4 +111,10 @@ app.get('/api/stats', (req, res) => {
   });
 });
 
-app.listen(PORT, () => console.log('Server running on port ' + PORT));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
+app.listen(PORT, () => {
+  console.log('Server running on port ' + PORT);
+});
