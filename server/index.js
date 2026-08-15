@@ -3,15 +3,14 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const { PDFDocument } = require('pdf-lib');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 const uploadDir = './uploads';
@@ -62,16 +61,13 @@ app.post('/api/convert', upload.single('pdf'), async (req, res) => {
     const pdfBuffer = fs.readFileSync(req.file.path);
     const outputFolder = path.join(outputDir, req.file.filename.replace('.pdf', ''));
     if (!fs.existsSync(outputFolder)) fs.mkdirSync(outputFolder, { recursive: true });
-    
     const outputPdf = await PDFDocument.create();
     const newPdf = await PDFDocument.load(pdfBuffer);
     const pages = await outputPdf.copyPages(newPdf, newPdf.getPageIndices());
     pages.forEach(page => outputPdf.addPage(page));
-    
     const outputBuffer = await outputPdf.save();
     fs.writeFileSync(path.join(outputFolder, 'converted.pdf'), outputBuffer);
     fs.unlinkSync(req.file.path);
-    
     res.json({ success: true, downloadUrl: '/output/' + req.file.filename.replace('.pdf', '') + '/converted.pdf', pages: newPdf.getPageCount() });
   } catch (error) {
     res.status(500).json({ error: error.message });
