@@ -3,13 +3,15 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const { PDFDocument } = require('pdf-lib');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 const uploadDir = './uploads';
@@ -43,7 +45,7 @@ function logUsage(endpoint, ip) {
     usageStats.dailyStats[today] = { requests: 0, conversions: 0, merges: 0 };
   }
   usageStats.dailyStats[today].requests++;
-  console.log(`[Usage] ${endpoint} - ${new Date().toISOString()}`);
+  console.log('[Usage] ' + endpoint + ' - ' + new Date().toISOString());
 }
 
 app.post('/api/upload', upload.single('pdf'), (req, res) => {

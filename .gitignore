@@ -6,3 +6,4 @@ output/
 *.zip
 *.sh
 .DS_Store
+.git-old
