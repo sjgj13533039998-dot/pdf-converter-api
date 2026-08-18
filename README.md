@@ -1,89 +1,173 @@
-# PDF Converter API
+# 📄 PDF Converter API
 
-一个基于 Node.js 的 PDF 转换 API 服务。
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub stars](https://img.shields.io/github/stars/sjgj13533039998-dot/pdf-converter-api)](https://github.com/sjgj13533039998-dot/pdf-converter-api/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/sjgj13533039998-dot/pdf-converter-api)](https://github.com/sjgj13533039998-dot/pdf-converter-api/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/sjgj13533039998-dot/pdf-converter-api)](https://github.com/sjgj13533039998-dot/pdf-converter-api/issues)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
+[![JavaScript](https://img.shields.io/badge/Language-JavaScript-yellow.svg)](https://javascript.info/)
 
-## 功能
+> **Free, open-source PDF conversion API for developers.**
 
-- PDF 转图片（JPG/PNG）
-- 合并多个 PDF
-- 压缩 PDF
+Convert PDF to Word, images, and text with a simple REST API. No signup required. No ads. Host yourself or use our free demo.
 
-## 安装
+---
+
+## ✨ Features
+
+- **PDF to Word** - Convert PDF documents to editable Word files (DOCX)
+- **PDF to Images** - Export PDF pages as high-quality JPG or PNG images
+- **PDF to Text** - Extract text content from PDF documents
+- **Merge PDF** - Combine multiple PDFs into one document
+- **Compress PDF** - Reduce PDF file size without losing quality
+- **No Signup** - Use immediately without creating an account
+- **Free Forever** - Open source and free to use
+- **Self-Hosted** - Deploy on your own server
+
+---
+
+## 🚀 Live Demo
+
+Try it now: https://pdf-converter-api-new.onrender.com
+
+---
+
+## 📖 API Usage
+
+### Convert PDF to Word
 
 ```bash
-cd server
-npm install
+curl -X POST https://pdf-converter-api-new.onrender.com/api/convert \
+  -F "file=@document.pdf" \
+  -F "target_format=docx" \
+  -o output.docx
 ```
 
-## 运行
+### Convert PDF to Image
 
 ```bash
+curl -X POST https://pdf-converter-api-new.onrender.com/api/convert \
+  -F "file=@document.pdf" \
+  -F "target_format=png" \
+  -o output.png
+```
+
+### Extract Text from PDF
+
+```bash
+curl -X POST https://pdf-converter-api-new.onrender.com/api/convert \
+  -F "file=@document.pdf" \
+  -F "target_format=text"
+```
+
+### Merge Multiple PDFs
+
+```bash
+curl -X POST https://pdf-converter-api-new.onrender.com/api/merge \
+  -F "pdfs=@doc1.pdf" \
+  -F "pdfs=@doc2.pdf" \
+  -o merged.pdf
+```
+
+---
+
+## 🛠️ Tech Stack
+
+| Component | Technology |
+|-----------|------------|
+| Backend | Node.js + Express |
+| PDF Processing | pdf-lib, pdf2docx |
+| File Upload | Multer |
+| Deployment | Render (Free Tier) |
+| Language | JavaScript/TypeScript |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+- Git
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/sjgj13533039998-dot/pdf-converter-api.git
+cd pdf-converter-api
+
+# Install dependencies
+npm install
+
+# Start the server
 npm start
 ```
 
-服务器将在 http://localhost:3000 启动
+### Environment Variables
 
-## API 端点
+Create a `.env` file:
 
-### 上传文件
-```
-POST /api/upload
-Content-Type: multipart/form-data
-Body: file=@document.pdf
-```
-
-### 转换 PDF
-```
-POST /api/convert
-Content-Type: multipart/form-data
-Body: pdf=@document.pdf
+```env
+PORT=3000
+NODE_ENV=development
+CORS_ORIGIN=*
 ```
 
-### 合并 PDF
-```
-POST /api/merge
-Content-Type: multipart/form-data
-Body: pdfs=@doc1.pdf,pdfs=@doc2.pdf
-```
+---
 
-## 部署到生产环境
+## 📦 Deployment
 
-### 使用 Render.com（免费）
-1. 注册 https://render.com
-2. 创建新 Web Service
-3. 连接 GitHub 仓库
-4. 设置构建命令：`npm install`
-5. 设置启动命令：`npm start`
-6. 添加环境变量：
-   - `PORT=10000`（Render 会自动分配）
+### Deploy to Render (Free)
 
-### 使用 Railway.app（免费）
-1. 注册 https://railway.app
-2. 创建新项目
-3. 从 GitHub 导入
-4. 自动部署
+1. Push your code to GitHub
+2. Go to [Render.com](https://render.com) and sign up
+3. Click "New +" → "Web Service"
+4. Connect your GitHub repository
+5. Configure:
+   - **Name**: pdf-converter-api
+   - **Environment**: Node
+   - **Build Command**: `npm install`
+   - **Start Command**: `npm start`
+6. Click "Create Web Service"
 
-## 定价建议
+### Deploy to Railway (Free)
 
-- Free: 10 次转换/月
-- Pro: $9.99/月，1000 次转换
-- Enterprise: $49.99/月，无限次
+1. Go to [Railway.app](https://railway.app)
+2. Click "New Project"
+3. Select "Deploy from GitHub repo"
+4. Choose your repository
+5. Railway will auto-detect and deploy
 
-## 技术栈
+---
 
-- Node.js + Express
-- pdf-lib（PDF 处理）
-- Multer（文件上传）
-- CORS（跨域支持）
+## 🤝 Contributing
 
-## 文件结构
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-```
-pdf-converter-api/
-├── server/
-│   └── index.js          # 后端服务器
-├── public/
-│   └── index.html        # 前端界面
-├── package.json          # 依赖配置
-└── README.md             # 文档
-```
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🔗 Links
+
+- **Live Demo**: https://pdf-converter-api-new.onrender.com
+- **GitHub**: https://github.com/sjgj13533039998-dot/pdf-converter-api
+- **Issues**: https://github.com/sjgj13533039998-dot/pdf-converter-api/issues
+
+---
+
+## 💬 Feedback
+
+Found a bug? Have a feature request? Open an issue on GitHub!
+
+---
+
+**Made with ❤️ by [sjgj13533039998-dot](https://github.com/sjgj13533039998-dot)**
+
+⭐ Star this repo if you find it helpful!
