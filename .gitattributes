@@ -1,31 +1,12 @@
-# Force GitHub to recognize JavaScript
-*.js language:javascript
-*.mjs language:javascript
-*.cjs language:javascript
-
-# Force GitHub to recognize JSON
-*.json language:javascript
-
-# Force GitHub to recognize HTML
-*.html language:html
-
-# Force GitHub to recognize CSS
-*.css language:css
-
-# Force GitHub to recognize Markdown
-*.md language:markdown
-
-# Force GitHub to recognize Shell
-*.sh language:shell
-*.bash language:shell
-
-# Force GitHub to recognize Docker
-Dockerfile language:dockerfile
-docker-compose.yml language:yaml
-docker-compose.yaml language:yaml
-
-# Force GitHub to recognize TOML
-*.toml language:toml
-
-# Force GitHub to recognize Environment
-.env language:environment
+# Language detection for GitHub
+*.js linguist-language=JavaScript
+*.mjs linguist-language=JavaScript
+*.cjs linguist-language=JavaScript
+*.json linguist-language=JavaScript
+*.html linguist-language=HTML
+*.css linguist-language=CSS
+*.md linguist-language=Markdown
+*.sh linguist-language=Shell
+*.bash linguist-language=Shell
+Dockerfile linguist-language=Dockerfile
+*.toml linguist-language=TOML
